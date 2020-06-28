@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
+  <div id="app" class="z-depth-5 blue-grey lighten-4">
     <h2>Todo List</h2>
-    <input type="text" v-model="currentTodo">
-    <button @click="addTodo" :disabled="isEmptyTodo">Add</button>
+    <input name="todo" type="text" placeholder="lets do a task" v-model="currentTodo">
+    <button class="waves-effect waves-light btn" @click="addTodo" :disabled="isEmptyTodo">Add</button>
     <todo-item :todos="remainingTodo" :shown="true"/>
-    <button @click="showCompleted = !showCompleted">Show/hide completed</button>
+    <button class="btn" @click="showCompleted = !showCompleted">{{showCompleted ? "Hide" : "Show"}} Completed</button>
     <todo-item :todos="completedTodo" :shown="showCompleted"></todo-item>
   </div>
 </template>
@@ -19,17 +19,25 @@ export default {
   data: function() {
     return {
       todos: [
-        {done: false, text: "buy milk"},
-        {done: false, text: "solve a problem"},
-        {done: true, text: "expert"}
+        {done: false, text: "buy milk", id: 1},
+        {done: false, text: "solve a problem", id: 2},
+        {done: true, text: "expert", id: 3}
       ],
       currentTodo: "",
+      currentId: 4,
       showCompleted: true
     }
   },
   methods: {
     addTodo: function() {
-      this.todos.push({done: false, text: this.currentTodo})
+      this.todos.push({done: false, text: this.currentTodo, id: this.currentId})
+      this.currentTodo = ""
+      this.currentId = this.currentId + 1;
+      console.log(this.currentId);
+    },
+    deleteTodo: function(currentTodo) {
+      console.log(this.todos);
+      this.todos = this.todos.filter(todo => todo.id != currentTodo.id)
     }
   },
   computed: {
@@ -46,9 +54,26 @@ export default {
 }
 </script>
 
-<style>
-  ul {
-    list-style: none;
-    padding: 0;
-  }
+<style lang="sass">
+  body
+    display: flex
+    justify-content: center
+    background-color: #90a4ae
+  #app
+    min-width: 50vw
+    padding: 50px 25px
+    min-height: 100vh
+  h2
+    text-align: center
+  
+  ul
+    list-style: none
+    padding: 0
+  span
+    color: #111
+  [type="checkbox"]:checked+span
+    text-decoration: line-through
+    color: #9e9e9e
+  ::placeholder
+    color: #888 !important
 </style>
