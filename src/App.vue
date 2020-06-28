@@ -19,12 +19,9 @@ export default {
   data: function() {
     return {
       todos: [
-        {done: false, text: "buy milk", id: 1},
-        {done: false, text: "solve a problem", id: 2},
-        {done: true, text: "expert", id: 3}
       ],
       currentTodo: "",
-      currentId: 4,
+      currentId: 1,
       showCompleted: true
     }
   },

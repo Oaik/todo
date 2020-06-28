@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import '../dist/css/materialize.min.css'
+import './assets/materialize.min.css'
 
 Vue.config.productionTip = false
 
